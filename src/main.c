@@ -26,8 +26,8 @@
 
 int main(void) {
 
-	printf("Hello World!");
-	printf("This is " PACKAGE_STRING ".");
+	printf("Hello World!\n");
+	printf("This is " PACKAGE_STRING ".\n");
 
 	return 0;
 }
