@@ -1,0 +1,8 @@
+*.in
+install-sh
+compile
+configure
+*.m4
+*.cache
+depcomp
+missing
