@@ -19,7 +19,7 @@ stamp-h1
 
 # make
 *.o
-hello
+dspc-hello
 
 # make distcheck
 *.tar.gz
