@@ -20,3 +20,6 @@ stamp-h1
 # make
 *.o
 hello
+
+# make distcheck
+*.tar.gz
