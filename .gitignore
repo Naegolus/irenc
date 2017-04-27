@@ -1,3 +1,5 @@
+
+# autoreconf --install
 *.in
 install-sh
 compile
@@ -6,9 +8,15 @@ configure
 *.cache
 depcomp
 missing
+
+# configure
 Makefile
 config.h
 config.log
 config.status
 .deps/
 stamp-h1
+
+# make
+*.o
+hello
