@@ -6,3 +6,9 @@ configure
 *.cache
 depcomp
 missing
+Makefile
+config.h
+config.log
+config.status
+.deps/
+stamp-h1
