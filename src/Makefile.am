@@ -1,3 +1,3 @@
 
-bin_PROGRAMS = hello
-hello_SOURCES = main.c
+bin_PROGRAMS = dspc-hello
+dspc_hello_SOURCES = main.c
