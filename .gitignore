@@ -27,6 +27,7 @@ stamp-h1
 dspc-hello
 !dspc-hello/
 *.exe
+build
 
 # make distcheck
 *.tar.gz
