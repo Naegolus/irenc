@@ -1,6 +1,7 @@
 
 # autoreconf --install
 *.in
+*.in~
 install-sh
 compile
 configure
@@ -8,12 +9,16 @@ configure
 *.cache
 depcomp
 missing
+ar-lib
+ltmain.sh
 
 # configure
 Makefile
 config.h
 config.log
 config.status
+config.guess
+config.sub
 .deps/
 stamp-h1
 
