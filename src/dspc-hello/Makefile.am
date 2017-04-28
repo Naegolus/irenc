@@ -22,7 +22,7 @@
 
 bin_PROGRAMS = dspc-hello
 
-AM_CPPFLAGS = -I../hal
+AM_CPPFLAGS = -I${srcdir}/../hal
 
 dspc_hello_LDADD = \
 		../hal/libhal.la
