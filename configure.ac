@@ -49,11 +49,8 @@ AC_SUBST([HAL_TYPE])
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
+	src/hal/Makefile
 	src/dspc-hello/Makefile
-	src/dspc-hello/hal/Makefile
-	src/dspc-hello/hal/generic/Makefile
-	src/dspc-hello/hal/linux/Makefile
-	src/dspc-hello/hal/windows/Makefile
 ])
 
 AC_OUTPUT
