@@ -23,6 +23,10 @@
 SUBDIRS = $(HAL_TYPE)
 
 noinst_LTLIBRARIES = libhal.la
+libhal_la_SOURCES = hal.cpp
 
 libhal_la_LIBADD = \
 		$(HAL_TYPE)/libhal-arch.la
+
+# Use dummy cpp file to ensure that hal lib is linked with g++
+nodist_EXTRA_libhal_la_SOURCES = dummy.cpp
