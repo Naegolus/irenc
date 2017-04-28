@@ -15,6 +15,7 @@ You can grab these from your Linux install where you're performing the build in 
 Note that you can have gcc include these libraries statically by including the flags, -static-libgcc and -static-libstdc++
 
 =>
+$ sudo apt-get install mingw-w64
 $ ../configure --host=i686-w64-mingw32 CFLAGS="-static-libgcc" CXXFLAGS="-static-libstdc++"
 
 R-Pi
