@@ -5,8 +5,8 @@ cd build/build-native
 ../../configure
 cd ../..
 
-mkdir -p build/build-win
-cd build/build-win
+mkdir -p build/build-win64
+cd build/build-win64
 ../../configure --host=i686-w64-mingw32 CFLAGS="-static-libgcc" CXXFLAGS="-static-libstdc++"
 cd ../..
 
