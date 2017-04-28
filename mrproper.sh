@@ -1,3 +1,3 @@
 #!/bin/sh
 
-git clean -fX
+git clean -xdf
