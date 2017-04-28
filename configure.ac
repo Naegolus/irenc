@@ -37,14 +37,11 @@ LT_INIT
 AC_CANONICAL_HOST
 case ${host} in
 	*mingw*)
-		HAL_TYPE='windows'
-		;;
+		HAL_TYPE='windows' ;;
 	*linux*)
-		HAL_TYPE='linux'
-		;;
+		HAL_TYPE='linux' ;;
 	*)
-		HAL_TYPE='generic'
-		;;
+		HAL_TYPE='generic' ;;
 esac
 AC_SUBST([HAL_TYPE])
 
