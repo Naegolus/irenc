@@ -21,4 +21,3 @@
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS = dspc-hello
-dspc_hello_SOURCES = main.c
