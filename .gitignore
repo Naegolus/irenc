@@ -20,6 +20,7 @@ stamp-h1
 # make
 *.o
 dspc-hello
+!dspc-hello/
 *.exe
 
 # make distcheck
