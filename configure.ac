@@ -20,7 +20,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-AC_CONFIG_AUX_DIR([.aux])
+#AC_CONFIG_AUX_DIR([.aux])
 
 AC_INIT([DSP-Crowd Autotools Hello World], [17.4-1], [office@dsp-crowd.com], [dspc_hello], [www.dsp-crowd.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
