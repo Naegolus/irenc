@@ -13,3 +13,5 @@ When compiling a C++ project, you must use {i686,x86_64}-w64-mingw32-g++ to at l
 When shipping a C++ project, you'll need to include LIBSTDC++-6.DLL and/or LIBGCC_S_SJLJ-1.DLL with your install.
 You can grab these from your Linux install where you're performing the build in the associated MinGW directory, e.g., /usr/lib/gcc/x86_64-w64-mingw32/4.6/.
 Note that you can have gcc include these libraries statically by including the flags, -static-libgcc and -static-libstdc++
+
+=> $ ../configure --host=i686-w64-mingw32 CFLAGS="-static-libgcc" CXXFLAGS="-static-libstdc++"
