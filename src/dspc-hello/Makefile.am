@@ -20,4 +20,12 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+SUBDIRS = hal
+
 bin_PROGRAMS = dspc-hello
+
+#nodist_EXTRA_dspc_hello_SOURCES = dummy.cxx
+
+dspc_hello_LDADD = \
+	hal/$(HAL_DIR)/libhal.la
+dspc_hello_LDFLAGS = -static

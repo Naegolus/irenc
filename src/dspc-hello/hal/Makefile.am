@@ -20,40 +20,4 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-AC_CONFIG_AUX_DIR([.])
-
-LT_INIT
-AC_CONFIG_MACRO_DIR([m4])
-
-AC_INIT([DSP-Crowd Autotools Hello World], [17.4-1], [office@dsp-crowd.com], [dspc_hello], [www.dsp-crowd.com])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
-
-AC_PROG_CC
-AC_PROG_CXX
-AM_PROG_AR
-
-AM_SILENT_RULES([yes])
-AC_CONFIG_HEADERS([config.h])
-
-AC_CANONICAL_HOST
-case ${host} in
-	*mingw*)
-		HAL_DIR='windows'
-		;;
-	*linux*)
-		HAL_DIR='linux'
-		;;
-	*)
-		HAL_DIR='generic'
-		;;
-esac
-AC_SUBST([HAL_DIR])
-
-AC_CONFIG_FILES([
-	Makefile
-	src/Makefile
-	src/dspc-hello/Makefile
-	src/dspc-hello/hal/generic/Makefile
-])
-
-AC_OUTPUT
+SUBDIRS = $(HAL_DIR)
