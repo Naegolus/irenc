@@ -24,8 +24,7 @@ SUBDIRS = hal
 
 bin_PROGRAMS = dspc-hello
 
-#nodist_EXTRA_dspc_hello_SOURCES = dummy.cxx
-
+nodist_EXTRA_dspc_hello_SOURCES = dummy.cxx
 dspc_hello_LDADD = \
-	hal/$(HAL_DIR)/libhal.la
+		hal/$(HAL_DIR)/libhal.la
 dspc_hello_LDFLAGS = -static
