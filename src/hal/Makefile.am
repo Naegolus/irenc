@@ -22,4 +22,4 @@
 
 noinst_LTLIBRARIES = libhal.la
 libhal_la_SOURCES = \
-		 hal.cpp
+		 hal-$(HAL_TYPE).cpp

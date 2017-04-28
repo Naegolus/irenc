@@ -23,6 +23,7 @@
 
 #include <config.h>
 #include <stdio.h>
+#include "hal.h"
 
 int main(void) {
 

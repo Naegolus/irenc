@@ -20,12 +20,12 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS = hal
-
 bin_PROGRAMS = dspc-hello
 
+AM_CPPFLAGS = -I../hal
+
 dspc_hello_LDADD = \
-		hal/$(HAL_DIR)/libhal.la
+		../hal/libhal.la
 dspc_hello_LDFLAGS = -static
 
 # Use dummy cpp file to ensure that hal lib is linked with g++

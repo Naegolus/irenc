@@ -35,16 +35,16 @@ LT_INIT
 AC_CANONICAL_HOST
 case ${host} in
 	*mingw*)
-		HAL_DIR='windows'
+		HAL_TYPE='windows'
 		;;
 	*linux*)
-		HAL_DIR='linux'
+		HAL_TYPE='linux'
 		;;
 	*)
-		HAL_DIR='generic'
+		HAL_TYPE='generic'
 		;;
 esac
-AC_SUBST([HAL_DIR])
+AC_SUBST([HAL_TYPE])
 
 AC_CONFIG_FILES([
 	Makefile
