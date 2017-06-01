@@ -22,6 +22,8 @@
 
 bin_PROGRAMS = dspc-hello
 
+dspc_hello_SOURCES = main.c
+
 AM_CPPFLAGS = -I${srcdir}/../hal
 
 dspc_hello_LDADD = \
