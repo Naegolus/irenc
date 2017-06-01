@@ -21,14 +21,12 @@
   along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <config.h>
-#include <stdio.h>
-#include "hal.h"
+#include "DspcHello.h"
 
-int main(void) {
+DspcHello app;
 
-	printf("Hello World!\n");
-	printf("This is " PACKAGE_STRING ".\n");
+int main(int argc, char *argv[]) {
 
-	return 0;
+	return app.exec(argc, argv);
+
 }

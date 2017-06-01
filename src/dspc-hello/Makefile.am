@@ -22,7 +22,7 @@
 
 bin_PROGRAMS = dspc-hello
 
-dspc_hello_SOURCES = main.c
+dspc_hello_SOURCES = main.cpp DspcHello.cpp
 
 AM_CPPFLAGS = -I${srcdir}/../hal
 
