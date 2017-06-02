@@ -24,7 +24,10 @@ bin_PROGRAMS = dspc-hello
 
 dspc_hello_SOURCES = main.cpp DspcHello.cpp
 
-AM_CPPFLAGS = -I${srcdir}/../hal
+AM_CPPFLAGS = \
+		-I${srcdir}/../hal \
+		-I${srcdir}/include \
+		-DHAVE_SSTREAM
 
 dspc_hello_LDADD = \
 		../hal/libhal.la
