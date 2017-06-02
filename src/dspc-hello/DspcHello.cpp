@@ -45,35 +45,41 @@ DspcHello::~DspcHello() {
 
 int DspcHello::exec(int argc, char *argv[]) {
 
-	cout << "Hello World!" << endl;
-	cout << "This is " << PACKAGE_STRING << endl;
-
 	try {
 		TCLAP::CmdLine cmd("Command description message", ' ', VERSION);
 
-		TCLAP::ValueArg<string> nameArg("n","name","Name to print",true,"homer","string");
-		cmd.add( nameArg );
+		TCLAP::ValueArg<string> nameArg("n", "name", "Name to print", true, "homer", "string");
+		cmd.add(nameArg);
 
-		TCLAP::SwitchArg reverseSwitch("r","reverse","Print name backwards", cmd, false);
+		TCLAP::SwitchArg reverseSwitch("r", "reverse", "Print name backwards", cmd, false);
 
-		cmd.parse( argc, argv );
+		cmd.parse(argc, argv);
 
-		string name = nameArg.getValue();
-		bool reverseName = reverseSwitch.getValue();
-
-		// Do what you intend
-		if ( reverseName )
-		{
-			reverse(name.begin(),name.end());
-			cout << "My name (spelled backwards) is: " << name << endl;
-		}
-		else
-			cout << "My name is: " << name << endl;
+		name = nameArg.getValue();
+		reverseName = reverseSwitch.getValue();
 
 	} catch (TCLAP::ArgException &tclapE) {
 		cerr << "error: " << tclapE.error() << " for arg " << tclapE.argId() << endl;
+		return 1;
 	}
 
+	return init();
+}
+
+int DspcHello::init() {
+
+	cout << "Hello World!" << endl;
+	cout << "This is " << PACKAGE_STRING << endl;
+
+	if (reverseName)
+	{
+		reverse(name.begin(),name.end());
+		cout << "My name (spelled backwards) is: " << name << endl;
+	}
+	else
+		cout << "My name is: " << name << endl;
+
 	return 0;
+
 }
 

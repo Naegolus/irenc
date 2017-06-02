@@ -26,6 +26,8 @@
 #ifndef DSPC_HELLO_H
 #define DSPC_HELLO_H
 
+#include <string>
+
 class DspcHello {
 
 public:
@@ -35,6 +37,10 @@ public:
 	int exec(int argc, char *argv[]);
 
 private:
+	int init();
+
+	std::string name;
+	bool reverseName;
 
 };
 
