@@ -22,7 +22,7 @@
 
 #AC_CONFIG_AUX_DIR([.aux])
 
-AC_INIT([DSP-Crowd Autotools Hello World], [17.4-1], [office@dsp-crowd.com], [dspc_hello], [www.dsp-crowd.com])
+AC_INIT([DSP-Crowd irsendraw], [17.4-1], [office@dsp-crowd.com], [irsend], [www.dsp-crowd.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
 AC_PROG_CC
