@@ -32,8 +32,20 @@
 #include "hal.h"
 
 using namespace std;
+using namespace TCLAP;
 
 // http://tclap.sourceforge.net/
+class MyOutput : public StdOutput
+{
+public:
+	virtual void usage(CmdLineInterface& c)
+	{
+		cout << "my usage message:" << endl;
+		list<Arg*> args = c.getArgList();
+		for (ArgListIterator it = args.begin(); it != args.end(); it++)
+			cout << (*it)->longID() << "  (" << (*it)->getDescription() << ")" << endl;
+	}
+};
 
 DspcHello::DspcHello() {
 
@@ -47,6 +59,9 @@ int DspcHello::exec(int argc, char *argv[]) {
 
 	try {
 		TCLAP::CmdLine cmd("Command description message", ' ', VERSION);
+
+		MyOutput my;
+		cmd.setOutput(&my);
 
 		TCLAP::ValueArg<string> nameArg("n", "name", "Name to print", true, "homer", "string");
 		cmd.add(nameArg);
