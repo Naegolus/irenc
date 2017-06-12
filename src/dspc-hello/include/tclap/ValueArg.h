@@ -24,6 +24,7 @@
 #define TCLAP_VALUE_ARGUMENT_H
 
 #include <string>
+#include <sstream>
 #include <vector>
 
 #include <tclap/Arg.h>
@@ -389,11 +390,16 @@ std::string ValueArg<T>::shortID(const std::string& val) const
 /**
  * Implementation of longID.
  */
+#define SSTR( x ) static_cast< std::ostringstream & >( \
+        ( std::ostringstream() << std::dec << x ) ).str()
 template<class T>
 std::string ValueArg<T>::longID(const std::string& val) const
 {
 	static_cast<void>(val); // Ignore input, don't warn
-	return Arg::longID( _typeDesc ); 
+	if(_required)
+		return Arg::longID( _typeDesc );
+	else
+		return Arg::longID( _typeDesc ) + " (default: " + SSTR(_default) + ")";
 }
 
 template<class T>

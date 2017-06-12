@@ -529,9 +529,9 @@ inline std::string Arg::longID( const std::string& valueId ) const
 		id += Arg::flagStartString() + _flag;
 
 		if ( _valueRequired )
-			id += std::string( 1, Arg::delimiter() ) + "<" + valueId + ">";
+			id += std::string( 1, Arg::delimiter() );
 
-		id += ",  ";
+		id += ", ";
 	}
 
 	id += Arg::nameStartString() + _name;
@@ -554,8 +554,10 @@ inline bool Arg::operator==(const Arg& a) const
 inline std::string Arg::getDescription() const
 {
 	std::string desc = "";
+#if 0
 	if ( _required )
 		desc = "(" + _requireLabel + ")  ";
+#endif
 
 //	if ( _valueRequired )
 //		desc += "(value required)  ";

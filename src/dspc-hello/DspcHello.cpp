@@ -40,10 +40,46 @@ class MyOutput : public StdOutput
 public:
 	virtual void usage(CmdLineInterface& c)
 	{
-		cout << "my usage message:" << endl;
-		list<Arg*> args = c.getArgList();
-		for (ArgListIterator it = args.begin(); it != args.end(); it++)
-			cout << (*it)->longID() << "  (" << (*it)->getDescription() << ")" << endl;
+		list<Arg*> argList = c.getArgList();
+		string message = c.getMessage();
+		XorHandler xorHandler = c.getXorHandler();
+		vector< vector<Arg*> > xorList = xorHandler.getXorList();
+
+		cout << PACKAGE << " " << VERSION << endl << endl;
+
+		cout << "Send arbitrary data bytes via infrared on the Raspberry Pi" << endl << endl;
+
+		cout  << "usage:";
+		_shortUsage(c, cout);
+		cout << endl << endl << "Options: " << endl << endl;
+
+		// first the xor
+		for(int i = 0; static_cast<unsigned int>(i) < xorList.size(); i++)
+		{
+			for(ArgVectorIterator it = xorList[i].begin(); it != xorList[i].end(); it++)
+			{
+				spacePrint(cout, (*it)->longID(), 75, 3, 3);
+				spacePrint(cout, (*it)->getDescription(), 75, 5, 0);
+
+				if(it + 1 != xorList[i].end())
+					spacePrint(cout, "-- OR --", 75, 9, 0);
+			}
+			cout << endl << endl;
+		}
+
+		// then the rest
+		for(ArgListIterator it = argList.begin(); it != argList.end(); it++)
+		{
+			if(!xorHandler.contains(*it))
+			{
+				spacePrint(cout, (*it)->longID(), 75, 3, 3);
+				spacePrint(cout, (*it)->getDescription(), 75, 5, 0);
+				cout << endl;
+			}
+		}
+
+		cout << endl << "Home page:\t\t" << PACKAGE_URL << endl;
+		cout << "Send bug reports to:\t" << PACKAGE_BUGREPORT << endl << endl;
 	}
 };
 
@@ -58,13 +94,16 @@ DspcHello::~DspcHello() {
 int DspcHello::exec(int argc, char *argv[]) {
 
 	try {
-		TCLAP::CmdLine cmd("Command description message", ' ', VERSION);
+		TCLAP::CmdLine cmd("x", ' ', VERSION);
 
 		MyOutput my;
 		cmd.setOutput(&my);
 
 		TCLAP::ValueArg<string> nameArg("n", "name", "Name to print", true, "homer", "string");
 		cmd.add(nameArg);
+
+		TCLAP::ValueArg<int> nameArg2("i", "namei", "Name to print", false, 3, "int");
+		cmd.add(nameArg2);
 
 		TCLAP::SwitchArg reverseSwitch("r", "reverse", "Print name backwards", cmd, false);
 
