@@ -1,4 +1,6 @@
 
+libtool
+
 # autoreconf --install
 *.in
 *.in~
