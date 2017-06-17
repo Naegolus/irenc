@@ -146,9 +146,6 @@ int IrEnc::exec(int argc, char *argv[]) {
 
 int IrEnc::init() {
 
-	cout << "pulse " << hdrMark << endl;
-	cout << "space " << hdrSpace << endl;
-
 	if(strDataIsSet) {
 		for(string::const_iterator c = strData.begin(); c != strData.end(); ++c) {
 			parseChar(*c);
@@ -250,6 +247,9 @@ void IrEnc::sendSignal() {
 			cout << "Done" << endl;
 	} else {
 #endif
+		cout << "pulse " << hdrMark << endl;
+		cout << "space " << hdrSpace << endl;
+
 		for(int i = 0; i < codes.size(); ++i) {
 			cout << (i & 1 ? "space " : "pulse ");
 			cout << codes[i] << endl;
