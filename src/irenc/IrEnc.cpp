@@ -211,14 +211,17 @@ void IrEnc::parseChar(char c) {
 	if(firstNibble)
 		byte = nibble << 4;
 	else {
-		int i = 8;
+		int bitIdx, i = 8;
 
 		byte += nibble;
 
 		while(i) {
 			addCode(bitMark);
 
-			if(byte & (1 << --i))
+			--i;
+			bitIdx = bitSwap ? 7 - i : i;
+
+			if(byte & (1 << bitIdx))
 				addCode(bitOneSpace);
 			else
 				addCode(bitZeroSpace);
