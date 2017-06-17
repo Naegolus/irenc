@@ -108,12 +108,15 @@ int IrEnc::exec(int argc, char *argv[]) {
 		TCLAP::ValueArg<string> argData("d", "data", "Data", false, "<not set>", "string", cmd);
 		/* Parameters */
 		TCLAP::ValueArg<int> argTailSpace("t", "tail-space", "Tail space", false, 15000, "int", cmd);
-		TCLAP::ValueArg<int> argTailMark("g", "tail-mark", "Tail mark", false, 440, "int", cmd);
+		TCLAP::ValueArg<int> argTailMark("j", "tail-mark", "Tail mark", false, 440, "int", cmd);
 		TCLAP::ValueArg<int> argBitZeroSpace("z", "bit-zero-space", "Bit zero space", false, 400, "int", cmd);
 		TCLAP::ValueArg<int> argBitOneSpace("o", "bit-one-space", "Bit one space", false, 1300, "int", cmd);
 		TCLAP::ValueArg<int> argBitMark("l", "bit-mark", "Bit mark", false, 440, "int", cmd);
 		TCLAP::ValueArg<int> argHdrSpace("r", "hdr-space", "Header space", false, 1700, "int", cmd);
 		TCLAP::ValueArg<int> argHdrMark("f", "hdr-mark", "Header mark", false, 3500, "int", cmd);
+#if TARGET_PI
+		TCLAP::ValueArg<int> argGpio("g", "gpio", "Set GPIO ID", false, 0, "int", cmd);
+#endif
 		/* Switches */
 		TCLAP::SwitchArg argBitSwap("s", "bit-swap", "Set bit swapping true or false", cmd, false);
 
@@ -129,6 +132,9 @@ int IrEnc::exec(int argc, char *argv[]) {
 		tailMark = argTailMark.getValue();
 		tailSpace = argTailSpace.getValue();
 		bitSwap = argBitSwap.getValue();
+#if TARGET_PI
+		gpio = argGpio.getValue();
+#endif
 
 	} catch (TCLAP::ArgException &tclapE) {
 		cerr << "error: " << tclapE.error() << " for arg " << tclapE.argId() << endl;
@@ -229,9 +235,19 @@ void IrEnc::addCode(int len) {
 
 void IrEnc::sendSignal() {
 
-	for(int i = 0; i < codes.size(); ++i) {
-		cout << (i & 1 ? "space " : "pulse ");
-		cout << codes[i] << endl;
+#if TARGET_PI
+	if(gpio) {
+		cout << "Sending data on GPIO " << gpio << endl;
+		gpio = 1;
+		cout << "Done" << endl;
+	} else {
+#endif
+		for(int i = 0; i < codes.size(); ++i) {
+			cout << (i & 1 ? "space " : "pulse ");
+			cout << codes[i] << endl;
+		}
+#if TARGET_PI
 	}
+#endif
 }
 

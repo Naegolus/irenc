@@ -54,6 +54,9 @@ private:
 	int tailMark;
 	int tailSpace;
 	bool bitSwap;
+#if TARGET_PI
+	int gpio;
+#endif
 
 	/* FSM */
 	bool firstNibble;
