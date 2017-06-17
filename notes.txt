@@ -14,6 +14,8 @@ When shipping a C++ project, you'll need to include LIBSTDC++-6.DLL and/or LIBGC
 You can grab these from your Linux install where you're performing the build in the associated MinGW directory, e.g., /usr/lib/gcc/x86_64-w64-mingw32/4.6/.
 Note that you can have gcc include these libraries statically by including the flags, -static-libgcc and -static-libstdc++
 
+apt-get install autoconf libtool
+
 $ autoreconf --install
 
 =>
