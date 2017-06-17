@@ -241,7 +241,7 @@ void IrEnc::sendSignal() {
 		int result = irSlingRaw(gpio, frequency, dutyCycle, codes.data(), codes.size());
 
 		if(result)
-			cout << "Error" << endl;
+			cout << "Error: irSlingRaw() failed" << endl;
 		else
 			cout << "Done" << endl;
 	} else {
