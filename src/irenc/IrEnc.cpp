@@ -118,7 +118,7 @@ int IrEnc::exec(int argc, char *argv[]) {
 		TCLAP::ValueArg<int> argGpio("g", "gpio", "Set GPIO ID", false, 0, "int", cmd);
 #endif
 		/* Switches */
-		TCLAP::SwitchArg argBitSwap("s", "bit-swap", "Set bit swapping true or false", cmd, false);
+		TCLAP::SwitchArg argBitSwap("s", "bit-swap", "Set bit swapping true or false", cmd);
 
 		cmd.parse(argc, argv);
 
