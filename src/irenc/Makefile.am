@@ -20,6 +20,8 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+SUBDIRS = include
+
 bin_PROGRAMS = irenc
 
 irenc_SOURCES = main.cpp IrEnc.cpp
@@ -35,6 +37,11 @@ AM_CPPFLAGS = \
 
 irenc_LDADD = \
 		../hal/libhal.la
+
+if BUILD_PIGPIO
+irenc_LDADD += include/pigpio/libpigpio.la
+endif
+
 irenc_LDFLAGS = -static
 
 # Use dummy cpp file to ensure that hal lib is linked with g++

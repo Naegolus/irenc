@@ -61,6 +61,8 @@ AC_CONFIG_FILES([
 	src/hal/linux/Makefile
 	src/hal/windows/Makefile
 	src/irenc/Makefile
+	src/irenc/include/Makefile
+	src/irenc/include/pigpio/Makefile
 ])
 
 AC_OUTPUT
