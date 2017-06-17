@@ -30,6 +30,9 @@
 #include "IrEnc.h"
 #include "config.h"
 #include "hal.h"
+#if TARGET_PI
+#include "irslinger.h"
+#endif
 
 using namespace std;
 using namespace TCLAP;
@@ -84,7 +87,9 @@ public:
 };
 
 IrEnc::IrEnc() {
-
+	firstNibble = true;
+	byte = 0;
+	codes.clear();
 }
 
 IrEnc::~IrEnc() {
@@ -100,25 +105,30 @@ int IrEnc::exec(int argc, char *argv[]) {
 		cmd.setOutput(&my);
 
 		/* Main Arguments */
-		TCLAP::ValueArg<string> argData("d", "data", "Data", false, "", "string", cmd);
+		TCLAP::ValueArg<string> argData("d", "data", "Data", false, "<not set>", "string", cmd);
 		/* Parameters */
+		TCLAP::ValueArg<int> argTailSpace("t", "tail-space", "Tail space", false, 15000, "int", cmd);
+		TCLAP::ValueArg<int> argTailMark("g", "tail-mark", "Tail mark", false, 440, "int", cmd);
 		TCLAP::ValueArg<int> argBitZeroSpace("z", "bit-zero-space", "Bit zero space", false, 400, "int", cmd);
 		TCLAP::ValueArg<int> argBitOneSpace("o", "bit-one-space", "Bit one space", false, 1300, "int", cmd);
+		TCLAP::ValueArg<int> argBitMark("l", "bit-mark", "Bit mark", false, 440, "int", cmd);
 		TCLAP::ValueArg<int> argHdrSpace("r", "hdr-space", "Header space", false, 1700, "int", cmd);
-		TCLAP::ValueArg<int> argTailSpace("t", "tail-space", "Tail space", false, 15000, "int", cmd);
+		TCLAP::ValueArg<int> argHdrMark("f", "hdr-mark", "Header mark", false, 3500, "int", cmd);
 		/* Switches */
 		TCLAP::SwitchArg argBitSwap("s", "bit-swap", "Set bit swapping true or false", cmd, false);
 
 		cmd.parse(argc, argv);
 
 		strDataIsSet = argData.isSet();
-		if(strDataIsSet)
-			strData = argData.getValue();
-		bitSwap = argBitSwap.getValue();
-		tailSpace = argTailSpace.getValue();
+		strData = argData.getValue();
+		hdrMark = argHdrMark.getValue();
 		hdrSpace = argHdrSpace.getValue();
+		bitMark = argBitMark.getValue();
 		bitOneSpace = argBitOneSpace.getValue();
 		bitZeroSpace = argBitZeroSpace.getValue();
+		tailMark = argTailMark.getValue();
+		tailSpace = argTailSpace.getValue();
+		bitSwap = argBitSwap.getValue();
 
 	} catch (TCLAP::ArgException &tclapE) {
 		cerr << "error: " << tclapE.error() << " for arg " << tclapE.argId() << endl;
@@ -130,16 +140,98 @@ int IrEnc::exec(int argc, char *argv[]) {
 
 int IrEnc::init() {
 
-	cout << "Hello World!" << endl;
-	cout << "This is " << PACKAGE_STRING << endl;
+	cout << "pulse " << hdrMark << endl;
+	cout << "space " << hdrSpace << endl;
 
-	char c;
-	while(cin.get(c))
-		cout << c;
-
-	cout << "End reached" << endl;
+	if(strDataIsSet) {
+		for(string::const_iterator c = strData.begin(); c != strData.end(); ++c) {
+			parseChar(*c);
+		}
+		parseChar('\n');
+	} else {
+		char c;
+		while(cin.get(c))
+			parseChar(c);
+	}
 
 	return 0;
+}
 
+void IrEnc::parseChar(char c) {
+
+	int nibble;
+
+	c = toupper(c);
+
+	switch(c) {
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+			nibble = c - '0';
+			break;
+		case 'A':
+		case 'B':
+		case 'C':
+		case 'D':
+		case 'E':
+		case 'F':
+			nibble = c - 'A';
+			break;
+		case ',':
+			addCode(tailMark);
+			addCode(tailSpace);
+			addCode(hdrMark);
+			addCode(hdrSpace);
+			return;
+		case '\n':
+			addCode(tailMark);
+			addCode(tailSpace);
+
+			sendSignal();
+			codes.clear();
+			return;
+		default:
+			/* ignore */
+			return;
+	}
+
+	if(firstNibble)
+		byte = nibble << 4;
+	else {
+		int i = 8;
+
+		byte += nibble;
+
+		while(i) {
+			addCode(bitMark);
+
+			if(byte & (1 << --i))
+				addCode(bitOneSpace);
+			else
+				addCode(bitZeroSpace);
+		}
+	}
+
+	firstNibble = !firstNibble;
+}
+
+void IrEnc::addCode(int len) {
+
+	codes.push_back(len);
+}
+
+void IrEnc::sendSignal() {
+
+	for(int i = 0; i < codes.size(); ++i) {
+		cout << (i & 1 ? "space " : "pulse ");
+		cout << codes[i] << endl;
+	}
 }
 

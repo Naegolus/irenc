@@ -27,7 +27,11 @@ irenc_SOURCES = main.cpp IrEnc.cpp
 AM_CPPFLAGS = \
 		-I${srcdir}/../hal \
 		-I${srcdir}/include \
-		-DHAVE_SSTREAM
+		-I${srcdir}/include/pigpio \
+		-I${srcdir}/include/ir-slinger \
+		-DHAVE_SSTREAM \
+		-DTARGET_PI=$(TARGET_PI) \
+		-std=c++11
 
 irenc_LDADD = \
 		../hal/libhal.la

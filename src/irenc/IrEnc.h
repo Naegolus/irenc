@@ -27,6 +27,7 @@
 #define IRENC_H
 
 #include <string>
+#include <vector>
 
 class IrEnc {
 
@@ -38,15 +39,26 @@ public:
 
 private:
 	int init();
+	void parseChar(char c);
+	void addCode(int len);
+	void sendSignal();
 
 	std::string strData;
 	bool strDataIsSet;
 
-	int tailSpace;
+	int hdrMark;
 	int hdrSpace;
+	int bitMark;
 	int bitOneSpace;
 	int bitZeroSpace;
+	int tailMark;
+	int tailSpace;
 	bool bitSwap;
+
+	/* FSM */
+	bool firstNibble;
+	int byte;
+	std::vector<int> codes;
 };
 
 #endif

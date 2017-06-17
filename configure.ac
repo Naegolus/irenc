@@ -44,6 +44,13 @@ case ${host} in
 		HAL_TYPE='generic' ;;
 esac
 AC_SUBST([HAL_TYPE])
+case ${host} in
+	*arm*)
+		TARGET_PI='1' ;;
+	*)
+		TARGET_PI='0' ;;
+esac
+AC_SUBST([TARGET_PI])
 
 AC_CONFIG_FILES([
 	Makefile
