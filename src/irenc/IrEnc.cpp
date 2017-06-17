@@ -238,8 +238,7 @@ void IrEnc::sendSignal() {
 		double dutyCycle = 0.5;
 
 		cout << "Sending data on GPIO " << gpio << endl;
-		//int result = irSlingRaw(gpio, frequency, dutyCycle, codes.data(), codes.size());
-		int result = 0;
+		int result = irSlingRaw(gpio, frequency, dutyCycle, codes.data(), codes.size());
 
 		if(result)
 			cout << "Error" << endl;
