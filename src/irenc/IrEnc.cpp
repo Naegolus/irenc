@@ -237,9 +237,17 @@ void IrEnc::sendSignal() {
 
 #if TARGET_PI
 	if(gpio) {
+		int frequency = 38000;
+		double dutyCycle = 0.5;
+
 		cout << "Sending data on GPIO " << gpio << endl;
-		gpio = 1;
-		cout << "Done" << endl;
+		//int result = irSlingRaw(gpio, frequency, dutyCycle, codes.data(), codes.size());
+		int result = 0;
+
+		if(result)
+			cout << "Error" << endl;
+		else
+			cout << "Done" << endl;
 	} else {
 #endif
 		for(int i = 0; i < codes.size(); ++i) {
