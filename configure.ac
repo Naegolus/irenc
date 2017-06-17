@@ -46,11 +46,12 @@ esac
 AC_SUBST([HAL_TYPE])
 case ${host} in
 	*arm*)
-		TARGET_PI='1' ;;
+		TARGET_PI=1 ;;
 	*)
-		TARGET_PI='0' ;;
+		TARGET_PI=0 ;;
 esac
 AC_SUBST([TARGET_PI])
+AM_CONDITIONAL([BUILD_PIGPIO], [test x$TARGET_PI = x1])
 
 AC_CONFIG_FILES([
 	Makefile
