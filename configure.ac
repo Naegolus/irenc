@@ -22,7 +22,7 @@
 
 #AC_CONFIG_AUX_DIR([.aux])
 
-AC_INIT([DSP-Crowd irsendraw], [17.4-1], [office@dsp-crowd.com], [irsend], [www.dsp-crowd.com])
+AC_INIT([DSP-Crowd irenc], [17.4-1], [office@dsp-crowd.com], [irenc], [www.dsp-crowd.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
 AC_PROG_CC
@@ -52,7 +52,7 @@ AC_CONFIG_FILES([
 	src/hal/generic/Makefile
 	src/hal/linux/Makefile
 	src/hal/windows/Makefile
-	src/dspc-hello/Makefile
+	src/irenc/Makefile
 ])
 
 AC_OUTPUT

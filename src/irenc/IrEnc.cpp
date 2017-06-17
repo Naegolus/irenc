@@ -27,7 +27,7 @@
 #include <iostream>
 #include <algorithm>
 #include <tclap/CmdLine.h>
-#include "DspcHello.h"
+#include "IrEnc.h"
 #include "config.h"
 #include "hal.h"
 
@@ -83,15 +83,15 @@ public:
 	}
 };
 
-DspcHello::DspcHello() {
+IrEnc::IrEnc() {
 
 }
 
-DspcHello::~DspcHello() {
+IrEnc::~IrEnc() {
 
 }
 
-int DspcHello::exec(int argc, char *argv[]) {
+int IrEnc::exec(int argc, char *argv[]) {
 
 	try {
 		TCLAP::CmdLine cmd("x", ' ', VERSION);
@@ -120,7 +120,7 @@ int DspcHello::exec(int argc, char *argv[]) {
 	return init();
 }
 
-int DspcHello::init() {
+int IrEnc::init() {
 
 	cout << "Hello World!" << endl;
 	cout << "This is " << PACKAGE_STRING << endl;

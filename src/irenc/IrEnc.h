@@ -5,6 +5,8 @@
   Author(s):
       - Johannes Natter, office@dsp-crowd.com
 
+  File created on 02.06.2017
+
   Copyright (C) 2017 Authors and www.dsp-crowd.com
 
   This program is free software: you can redistribute it and/or modify
@@ -21,12 +23,26 @@
   along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "DspcHello.h"
+#ifndef IRENC_H
+#define IRENC_H
 
-DspcHello app;
+#include <string>
 
-int main(int argc, char *argv[]) {
+class IrEnc {
 
-	return app.exec(argc, argv);
+public:
+	IrEnc();
+	virtual ~IrEnc();
 
-}
+	int exec(int argc, char *argv[]);
+
+private:
+	int init();
+
+	std::string name;
+	bool reverseName;
+
+};
+
+#endif
+

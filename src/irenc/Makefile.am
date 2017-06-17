@@ -20,18 +20,18 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-bin_PROGRAMS = dspc-hello
+bin_PROGRAMS = irenc
 
-dspc_hello_SOURCES = main.cpp DspcHello.cpp
+irenc_SOURCES = main.cpp IrEnc.cpp
 
 AM_CPPFLAGS = \
 		-I${srcdir}/../hal \
 		-I${srcdir}/include \
 		-DHAVE_SSTREAM
 
-dspc_hello_LDADD = \
+irenc_LDADD = \
 		../hal/libhal.la
-dspc_hello_LDFLAGS = -static
+irenc_LDFLAGS = -static
 
 # Use dummy cpp file to ensure that hal lib is linked with g++
-nodist_EXTRA_dspc_hello_SOURCES = dummy.cpp
+nodist_EXTRA_irenc_SOURCES = dummy.cpp
