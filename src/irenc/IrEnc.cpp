@@ -99,18 +99,26 @@ int IrEnc::exec(int argc, char *argv[]) {
 		MyOutput my;
 		cmd.setOutput(&my);
 
-		TCLAP::ValueArg<string> nameArg("n", "name", "Name to print", true, "homer", "string");
-		cmd.add(nameArg);
-
-		TCLAP::ValueArg<int> nameArg2("i", "namei", "Name to print", false, 3, "int");
-		cmd.add(nameArg2);
-
-		TCLAP::SwitchArg reverseSwitch("r", "reverse", "Print name backwards", cmd, false);
+		/* Main Arguments */
+		TCLAP::ValueArg<string> argData("d", "data", "Data", false, "", "string", cmd);
+		/* Parameters */
+		TCLAP::ValueArg<int> argBitZeroSpace("z", "bit-zero-space", "Bit zero space", false, 400, "int", cmd);
+		TCLAP::ValueArg<int> argBitOneSpace("o", "bit-one-space", "Bit one space", false, 1300, "int", cmd);
+		TCLAP::ValueArg<int> argHdrSpace("r", "hdr-space", "Header space", false, 1700, "int", cmd);
+		TCLAP::ValueArg<int> argTailSpace("t", "tail-space", "Tail space", false, 15000, "int", cmd);
+		/* Switches */
+		TCLAP::SwitchArg argBitSwap("s", "bit-swap", "Set bit swapping true or false", cmd, false);
 
 		cmd.parse(argc, argv);
 
-		name = nameArg.getValue();
-		reverseName = reverseSwitch.getValue();
+		strDataIsSet = argData.isSet();
+		if(strDataIsSet)
+			strData = argData.getValue();
+		bitSwap = argBitSwap.getValue();
+		tailSpace = argTailSpace.getValue();
+		hdrSpace = argHdrSpace.getValue();
+		bitOneSpace = argBitOneSpace.getValue();
+		bitZeroSpace = argBitZeroSpace.getValue();
 
 	} catch (TCLAP::ArgException &tclapE) {
 		cerr << "error: " << tclapE.error() << " for arg " << tclapE.argId() << endl;
@@ -125,13 +133,11 @@ int IrEnc::init() {
 	cout << "Hello World!" << endl;
 	cout << "This is " << PACKAGE_STRING << endl;
 
-	if (reverseName)
-	{
-		reverse(name.begin(),name.end());
-		cout << "My name (spelled backwards) is: " << name << endl;
-	}
-	else
-		cout << "My name is: " << name << endl;
+	char c;
+	while(cin.get(c))
+		cout << c;
+
+	cout << "End reached" << endl;
 
 	return 0;
 

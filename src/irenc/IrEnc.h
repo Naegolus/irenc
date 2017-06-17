@@ -39,9 +39,14 @@ public:
 private:
 	int init();
 
-	std::string name;
-	bool reverseName;
+	std::string strData;
+	bool strDataIsSet;
 
+	int tailSpace;
+	int hdrSpace;
+	int bitOneSpace;
+	int bitZeroSpace;
+	bool bitSwap;
 };
 
 #endif
